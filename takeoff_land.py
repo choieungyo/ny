@@ -41,3 +41,7 @@ arm_and_takeoff(4)
 time.sleep(DURATION)
 time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
+while vehicle.mode!='LAND':
+    time.sleep(1)
+    print("Waiting for drone to land")
+print("Landing..")
