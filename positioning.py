@@ -1,12 +1,11 @@
 import time
 import math
-from __future__ import print_function
 from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelative
 print("connecting to Vehicle")
-vehicle= connect("127.0.0.1:14551",wait_ready=True)
+vehicle= connect("/dev/ttyACM0",wait_ready=True)
 vehicle.airspeed = 0.3
 vehicle.groundspeed = 0.3
-sleep(1)
+time.sleep(1)
 def arm_and_takeoff(aTargetAltitude):
 
     print "Basic pre-arm checks"
@@ -59,5 +58,12 @@ arm_and_takeoff(4)
 time.sleep(DURATION)
 goto_position_target_local_ned(2,2,0)
 time.sleep(DURATION)
-sleep(3)
+time.sleep(3)
+goto_position_target_local_ned(-2,-2,0)
+time.sleep(DURATION)
+time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
+while vehicle.mode!='LAND':
+    time.sleep(1)
+    print("Waiting for drone to land")
+print("Landing..")
