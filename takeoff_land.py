@@ -38,6 +38,8 @@ def arm_and_takeoff(aTargetAltitude):
         time.sleep(1)
 
 arm_and_takeoff(4)
+vehicle.airspeed = 0.3
+vehicle.groundspeed = 0.3
 time.sleep(DURATION)
 time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
@@ -45,3 +47,5 @@ while vehicle.mode!='LAND':
     time.sleep(1)
     print("Waiting for drone to land")
 print("Landing..")
+print("close vehicle")
+vehicle.close()
