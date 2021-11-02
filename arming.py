@@ -21,3 +21,6 @@ def arming():
         time.sleep(1)
    
 arming()
+time.sleep(3)
+print("close vehicle")
+vehicle.close()
