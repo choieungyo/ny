@@ -38,27 +38,27 @@ def arm_and_takeoff(aTargetAltitude):
             break
         time.sleep(1)
 
-def goto_position_target_local_ned(north, east, down):
-    """
-    Send SET_POSITION_TARGET_LOCAL_NED command to request the vehicle fly to a specified
-    location in the North, East, Down frame.
-    """
-    msg = vehicle.message_factory.set_position_target_local_ned_encode(
-        0,       # time_boot_ms (not used)
-        0, 0,    # target system, target component
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, # frame
-        0b0000111111111000, # type_mask (only positions enabled)
-        north, east, down,
-        0, 0, 0, # x, y, z velocity in m/s  (not used)
-        0, 0, 0, # x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)
-        0, 0)    # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)
-    # send command to vehicle
-    vehicle.send_mavlink(msg)
+def goto(dNorth, dEast, gotoFunction=vehicle.simple_goto):
+
+    currentLocation = vehicle.location.global_relative_frame
+    targetLocation = get_location_metres(currentLocation, dNorth, dEast)
+    targetDistance = get_distance_metres(currentLocation, targetLocation)
+    gotoFunction(targetLocation)
+    
+
+    while vehicle.mode.name=="GUIDED": #Stop action if we are no longer in guided mode.
+        #print "DEBUG: mode: %s" % vehicle.mode.name
+        remainingDistance=get_distance_metres(vehicle.location.global_relative_frame, targetLocation)
+        print("Distance to target: ", remainingDistance)
+        if remainingDistance<=targetDistance*0.01: #Just below target, in case of undershoot.
+            print("Reached target")
+            break;
+        time.sleep(2)
 
 arm_and_takeoff(4)
-goto_position_target_local_ned(2,2,0)
+goto(2,2)
 time.sleep(3)
-goto_position_target_local_ned(-2,-2,0)
+goto(-2,-2)
 time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
 while vehicle.mode!='LAND':
