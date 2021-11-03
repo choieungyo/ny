@@ -24,3 +24,5 @@ arming()
 time.sleep(3)
 print("close vehicle")
 vehicle.close()
+
+%%test3
