@@ -40,7 +40,6 @@ def arm_and_takeoff(aTargetAltitude):
 arm_and_takeoff(4)
 vehicle.airspeed = 0.3
 vehicle.groundspeed = 0.3
-time.sleep(DURATION)
 time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
 while vehicle.mode!='LAND':
