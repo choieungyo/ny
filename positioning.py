@@ -55,12 +55,9 @@ def goto_position_target_local_ned(north, east, down):
     vehicle.send_mavlink(msg)
 
 arm_and_takeoff(4)
-time.sleep(DURATION)
 goto_position_target_local_ned(2,2,0)
-time.sleep(DURATION)
 time.sleep(3)
 goto_position_target_local_ned(-2,-2,0)
-time.sleep(DURATION)
 time.sleep(3)
 vehicle.mode = VehicleMode("LAND")
 while vehicle.mode!='LAND':
