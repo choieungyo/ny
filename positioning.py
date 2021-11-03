@@ -1,6 +1,7 @@
 import time
 import math
 from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelative
+from pymavlink import mavutil
 print("connecting to Vehicle")
 vehicle= connect("/dev/ttyACM0",wait_ready=True)
 vehicle.airspeed = 0.3
