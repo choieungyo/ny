@@ -4,7 +4,7 @@ from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelativ
 from pymavlink import mavutil
 print("connecting to Drone")
 Drone = connect("/dev/ttyAMA0", baudrate = 57600, wait_ready = True)
-Drone.airspeed = 0.3
+Drone.airspeed = 1
 Drone.groundspeed = 0.3
 print("conncting to Rover")
 Rover = connect("/dev/", baudrate = 57600, wait_ready = True)
