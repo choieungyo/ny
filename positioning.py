@@ -4,7 +4,7 @@ from dronekit import connect, VehicleMode, LocationGlobal, LocationGlobalRelativ
 from pymavlink import mavutil
 print("connecting to Vehicle")
 vehicle= connect("/dev/ttyACM0",wait_ready=True)
-vehicle.airspeed = 0.3
+vehicle.airspeed = 1
 vehicle.groundspeed = 0.3
 time.sleep(1)
 def arm_and_takeoff(aTargetAltitude):
