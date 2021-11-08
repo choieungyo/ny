@@ -9,4 +9,4 @@ Drone.groundspeed = 0.3
 print("conncting to Rover")
 Rover = connect("/dev/", baudrate = 57600, wait_ready = True)
 Rover.groundspeed = 1
-time.slee(1)
+time.sleep(1)
